@@ -2,12 +2,173 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<meta http-equiv="refresh" content="0; url=/">
-<title>Redirecting</title>
+<title>Advanced planning overview | Product Guides</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #172b4d; line-height: 1.6; margin: 0; background: #fff; }
+  .topbar { border-bottom: 1px solid #ebecf0; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; background: #fff; z-index: 10; }
+  .brand { font-weight: 700; font-size: 15px; color: #0052cc; letter-spacing: -0.2px; }
+  .brand span { color: #172b4d; font-weight: 600; }
+  .searchwrap { position: relative; }
+  .searchwrap input { width: 260px; max-width: 46vw; padding: 8px 12px 8px 34px; border: 2px solid #dfe1e6; border-radius: 6px; font-size: 14px; background: #fafbfc; }
+  .searchwrap input:focus { outline: none; border-color: #4c9aff; background: #fff; }
+  .searchwrap .ico { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: #7a869a; font-size: 14px; }
+  .noresults { display: none; position: absolute; top: 42px; left: 0; background: #fff; border: 1px solid #ebecf0; border-radius: 6px; padding: 10px 12px; font-size: 13px; color: #5e6c84; box-shadow: 0 4px 12px rgba(9,30,66,0.15); white-space: nowrap; }
+  .hero { background: linear-gradient(180deg, #f4f5f7 0%, #fff 100%); padding: 56px 24px 36px; }
+  .hero-inner { max-width: 760px; margin: 0 auto; }
+  .eyebrow { color: #6554c0; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .hero h1 { font-size: 36px; line-height: 1.2; margin: 0 0 14px; color: #091e42; letter-spacing: -0.5px; }
+  .hero p { font-size: 18px; color: #42526e; margin: 0; }
+  .doc { max-width: 760px; margin: 0 auto; padding: 8px 24px 80px; }
+  .doc h2 { font-size: 22px; margin: 38px 0 12px; color: #091e42; }
+  .doc p { margin: 0 0 14px; color: #42526e; }
+  .doc ul { color: #42526e; padding-left: 22px; }
+  .doc li { margin-bottom: 7px; }
+  .callout { background: #deebff; border-radius: 8px; padding: 16px 18px; margin: 22px 0; font-size: 14px; color: #172b4d; }
+  .callout b { color: #0747a6; }
+  footer { border-top: 1px solid #ebecf0; padding: 24px; text-align: center; color: #7a869a; font-size: 12px; }
+
+  #sheet { display: none; max-width: 880px; margin: 0 auto; padding: 24px 24px 64px; }
+  .sheethead { background: #0052cc; color: #fff; padding: 18px 22px; border-radius: 10px; }
+  .sheethead h1 { margin: 0 0 4px; font-size: 19px; }
+  .sheethead .sub { font-size: 13px; opacity: 0.85; }
+  .howto { background: #f4f5f7; border: 1px solid #ebecf0; border-radius: 10px; padding: 13px 18px; margin: 16px 0; font-size: 13.5px; }
+  .howto b { color: #091e42; }
+  .decision { background: #fffae6; border: 1px solid #ffe380; border-radius: 10px; padding: 13px 18px; margin: 18px 0 8px; font-size: 13.5px; }
+  .decision strong { color: #974f0c; }
+  .card { background: #fff; border: 1px solid #ebecf0; border-radius: 10px; padding: 15px 17px; margin: 11px 0; box-shadow: 0 1px 2px rgba(9,30,66,0.08); }
+  .badges { margin-bottom: 9px; }
+  .pill { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 9px; border-radius: 3px; margin-right: 8px; background: #e3fcef; color: #006644; }
+  .owner { font-size: 11px; color: #7a869a; }
+  .field { margin: 9px 0 0; }
+  .flabel { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: #97a0af; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between; }
+  .box { background: #fafbfc; border: 1px solid #ebecf0; border-radius: 6px; padding: 9px 12px; font-size: 13.5px; }
+  .box.summary { font-weight: 600; }
+  .cp { font-size: 11px; font-weight: 600; color: #0052cc; background: #fff; border: 1px solid #dfe1e6; border-radius: 5px; padding: 3px 10px; cursor: pointer; }
+  .cp:hover { background: #f4f5f7; }
+  .cp.done { background: #006644; color: #fff; border-color: #006644; }
+  .dt { width: 100%; border-collapse: collapse; margin: 10px 0; background: #fff; border: 1px solid #ebecf0; border-radius: 8px; overflow: hidden; }
+  .dt th { text-align: left; background: #f4f5f7; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: #5e6c84; padding: 8px 11px; }
+  .dt td { font-size: 13px; padding: 8px 11px; border-top: 1px solid #ebecf0; color: #172b4d; }
+  .dt td:first-child { font-weight: 600; white-space: nowrap; }
+  .dt td:last-child { white-space: nowrap; font-weight: 600; }
+</style>
 </head>
 <body>
-<script>location.replace('/');</script>
-<p>Redirecting…</p>
+
+  <div class="topbar">
+    <div class="brand">Product<span>Guides</span></div>
+    <div class="searchwrap">
+      <span class="ico">&#9906;</span>
+      <input type="search" id="q" placeholder="Search the guide" autocomplete="off"
+             onkeypress="if(event.key==='Enter')doSearch()">
+      <div class="noresults" id="noresults"></div>
+    </div>
+  </div>
+
+  <div id="guide">
+    <div class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">Advanced planning</div>
+        <h1>What is advanced planning?</h1>
+        <p>Advanced planning helps teams turn a backlog into a realistic, time-based plan: mapping work to a timeline, balancing capacity, and keeping dependencies visible as priorities change.</p>
+      </div>
+    </div>
+    <div class="doc">
+      <h2>Plan across teams</h2>
+      <p>Bring multiple teams' work into a single view so you can see the whole programme rather than one board at a time. Group work by initiative, team, or release to understand where effort is concentrated and where the gaps are.</p>
+      <h2>Visualise your roadmap</h2>
+      <p>A timeline view shows when work is expected to start and finish, with milestones and releases marked along the way. Use it to spot clashes early and to communicate a plan to stakeholders.</p>
+      <ul>
+        <li>Map epics and stories to a calendar to see the shape of delivery.</li>
+        <li>Mark releases and key dates as milestones.</li>
+        <li>Roll progress up from child issues so the view reflects reality.</li>
+      </ul>
+      <h2>Manage capacity and dependencies</h2>
+      <p>Set how much each team can take on per sprint and let the plan flag when you have committed beyond that. Dependency links make it clear when one piece of work is waiting on another.</p>
+      <div class="callout"><b>Tip:</b> keep your plan honest by reviewing it regularly. Use the search above to jump straight to a section.</div>
+      <h2>Scenario planning</h2>
+      <p>Try out changes safely before committing them. Model what happens if a date moves, a team's capacity changes, or scope is added, then compare against your current plan before deciding.</p>
+    </div>
+    <footer>Product Guides &middot; Advanced planning overview</footer>
+  </div>
+
+  <div id="sheet"></div>
+
+<script>
+  var PAYLOAD = { salt: "HCsih6dY+soQyIe81bqXQw==", iv: "DESJ+F+JT0CG5wec", data: "KE+kxl+m/wvnFhN5p2K05r/ouvOclOY8YTU32wxunOZoDzgYDFKz9IFlOO7z+KIwkkhWZr6oDR2erG5R2qu4lA9hV517gA+wq43LAt0xFz+g/IAuvCgxEUxQef8f0O1+im1Yoo6U4xHkoiPLGtostOoKE4BvJKwBXA+kG7YEqEgEw+PY1BM0ArDLMIkoctFJV/RcjVgNs7n2rjfyChocqqXBXZ8+qTNt7WTby+Qq2hYX/AtM0m4DjJafJWabFAj9DlR6l+qqIk9dnIh3udmz1++PS2mpYR8YoKOJJJTQ8DRIAGggjwpTT/uqQKCY5rGi85GcGieFSHM1nz+jqQTSbzHBc2oGAv4m9Rdu9IcExCjQtL/phgZqu4+aI9Fe2PB9+cIgk1wpovXnqB977tIZP2eIL+k++Z4ejWO/pB4N/472zZ25VOtHkPbLlrsdxuVqowqiT/GeGMTdYv2egMrnR8yvB8ZG1suirCGAekEbLyBZOURw6zbqz/ioWFZLM5pUZipcSMjI7mo4b3FUn2pROXvKL2iDViFc008anSy0woyOvsqBJJszcbPEeqPM94xErtLNRjxYofuYoLH8WDsS1GVayi2NCztcMmADu2PyQz1SRZP+0O+tlZ3xV8sHgWCSncsQqMK6HgVq1kh400V0Wp0IkwxF5Sc6pJDkcc4WUJ4a3K4WAZBSlKThw60PCMvQqzT6T987fYnm1BJl8lUl9tEJmu28wh005QMakzDqCgL0oby5V9q4Hf5Coa7d5BR7lsOMKMfQ4acvd5HvQEmC3Bc9eHMOyHXaGoagsL3FsLARy9F9GmA/w2ZAIqLbO+7igCHBsaBgTsjXm7ozHFfB/MHOShIYUvKEl5Sit3n0QxYVbrsfBqYQK3J0e+0XtN2WrIbxyrLe8NQLkOWO5HJWTjfO+U5PpSUqvMnGboA/Kvpctod5vqMv+GFyjE0A9sPzZu182crpAp0ecdeRKUdsXA8HJAd22333R+i3l7FFirfcFAmgJ6tvLXz2BSQ+PWx92QdT1VWHraJK5YQ0DFjx7V118nFqGnSWRXtYba1nUvkgylk7dzy3UFpxtCxQrhfGg+8VkrvKdlNuWJ+XzXOZlUg5p+mMmZKCcshVf4ienQLuqRyiClbuqqYzA9TxH2TRfTuiYjGXe5GBAlA9hiYHy94a2wTd3V7rIQGYeqRR45HK0VuDWpwKq+opO7GgDFbKHL6YdR6IdZqpezKKvaPPEMRKjjY9ccm2UztGqluNBL/q5CMVitWd8ESULarwWOUzeVq39gkmNj0afS37VvZwJwXQNXqPmb0LU1NrGvqgjisJKrfmrCPWkqOSJduHMfOpqFSyEjQEV1EnZHXsbFjv8+FIZ3LXRdJ2D8qO/QtVtAF+ZUhVC1Oga0bOoWpzorrqAFw5lNxShdmN+LWq3bFAZeNoK5szEtVdWVFZYgHbhqaPHeU9lbNknmF7mVBcRYmeSrYi6XCmsj3k00c7MnZ3J1xMgJcEJpgU3n5ZOZwDXa0WOOBwG5LDy9j6n/bPJHz7bErGJ17CjUcW8okKsPTHbba2Eka0jdHS8JkxCViWKdVzF/i2jzZeKGojVtlVVDOhWtoB1EzqG8CkN1LGF0EbB0OTnNlxhi+wQ29UFMwhNWuW2vpoNRO2KjZBT6FpH+MH+D/WYV2JKOtItgLnaP+01mzPOQSEVPmjDdv6H3pSzkA/zBs0taKA7utMqQVUiW5CBTdRReG6yO2Tm1ZLKw14kGuxMNZkilkZcQrDIJO0WwA/A6xchOcW3GabZVCayXR58wlKEvw2XfdCYAtpk76I" };
+
+  function b64ToBytes(b64){
+    var bin = atob(b64), a = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i);
+    return a;
+  }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  async function doSearch(){
+    var q = document.getElementById('q').value;
+    var nr = document.getElementById('noresults');
+    nr.style.display = 'none';
+    if (!q) return;
+    try {
+      var enc = new TextEncoder();
+      var km = await crypto.subtle.importKey('raw', enc.encode(q), 'PBKDF2', false, ['deriveKey']);
+      var key = await crypto.subtle.deriveKey(
+        { name: 'PBKDF2', salt: b64ToBytes(PAYLOAD.salt), iterations: 200000, hash: 'SHA-256' },
+        km, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+      var plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64ToBytes(PAYLOAD.iv) }, key, b64ToBytes(PAYLOAD.data));
+      var obj = JSON.parse(new TextDecoder().decode(plain));
+      renderSheet(obj);
+      document.getElementById('guide').style.display = 'none';
+      document.getElementById('sheet').style.display = 'block';
+      document.getElementById('q').value = '';
+      window.scrollTo(0, 0);
+    } catch (e) {
+      nr.textContent = 'No results found for "' + q + '".';
+      nr.style.display = 'block';
+    }
+  }
+
+  var idc = 0;
+  function renderSheet(obj){
+    var h = '';
+    h += '<div class="sheethead"><h1>Eligibility plan: Jira actions</h1><div class="sub">From the data plan check</div></div>';
+    h += '<div class="howto"><b>Step 1 &middot; add the missing ticket</b> under the Eligibility &amp; Unique ID epic (MGS-19212). Copy each field straight into Jira.</div>';
+    obj.newTickets.forEach(function(t){
+      idc++; var sid = 's' + idc, did = 'd' + idc;
+      h += '<div class="card"><div class="badges"><span class="pill">NEW TICKET</span><span class="owner">Epic ' + esc(t.epic) + ' &middot; Due ' + esc(t.due) + '</span></div>';
+      h += '<div class="field"><div class="flabel">Summary <button class="cp" data-label="Copy" onclick="copyEl(this,\'' + sid + '\')">Copy</button></div><div class="box summary" id="' + sid + '">' + esc(t.summary) + '</div></div>';
+      h += '<div class="field"><div class="flabel">Description <button class="cp" data-label="Copy" onclick="copyEl(this,\'' + did + '\')">Copy</button></div><div class="box" id="' + did + '">' + esc(t.description) + '</div></div>';
+      h += '</div>';
+    });
+    h += '<div class="decision"><strong>Step 2 &middot; check these due dates</strong> against Jira and fix any that do not match. The August items looked early on the timeline.</div>';
+    h += '<table class="dt"><tr><th>Ticket</th><th>Activity</th><th>Target</th></tr>';
+    obj.dateChecks.forEach(function(d){
+      h += '<tr><td>' + esc(d.key) + '</td><td>' + esc(d.activity) + '</td><td>' + esc(d.target) + '</td></tr>';
+    });
+    h += '</table>';
+    document.getElementById('sheet').innerHTML = h;
+  }
+
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+  function flash(btn){
+    btn.textContent = 'Copied'; btn.classList.add('done');
+    setTimeout(function(){ btn.textContent = btn.getAttribute('data-label'); btn.classList.remove('done'); }, 1200);
+  }
+  function copyEl(btn, id){
+    var text = document.getElementById(id).innerText.trim();
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ flash(btn); }, function(){ fallbackCopy(text); flash(btn); });
+    } else { fallbackCopy(text); flash(btn); }
+  }
+</script>
 </body>
 </html>

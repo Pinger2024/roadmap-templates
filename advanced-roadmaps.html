@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Advanced planning overview | Product Guides</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #172b4d; line-height: 1.6; margin: 0; background: #fff; }
+  .topbar { border-bottom: 1px solid #ebecf0; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; background: #fff; z-index: 10; }
+  .brand { font-weight: 700; font-size: 15px; color: #0052cc; letter-spacing: -0.2px; }
+  .brand span { color: #172b4d; font-weight: 600; }
+  .navlinks { display: none; }
+  .searchwrap { position: relative; }
+  .searchwrap input { width: 260px; max-width: 46vw; padding: 8px 12px 8px 34px; border: 2px solid #dfe1e6; border-radius: 6px; font-size: 14px; background: #fafbfc; }
+  .searchwrap input:focus { outline: none; border-color: #4c9aff; background: #fff; }
+  .searchwrap .ico { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: #7a869a; font-size: 14px; }
+  .noresults { display: none; position: absolute; top: 42px; left: 0; background: #fff; border: 1px solid #ebecf0; border-radius: 6px; padding: 10px 12px; font-size: 13px; color: #5e6c84; box-shadow: 0 4px 12px rgba(9,30,66,0.15); white-space: nowrap; }
+  .hero { background: linear-gradient(180deg, #f4f5f7 0%, #fff 100%); padding: 56px 24px 36px; }
+  .hero-inner { max-width: 760px; margin: 0 auto; }
+  .eyebrow { color: #6554c0; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .hero h1 { font-size: 36px; line-height: 1.2; margin: 0 0 14px; color: #091e42; letter-spacing: -0.5px; }
+  .hero p { font-size: 18px; color: #42526e; margin: 0; }
+  .doc { max-width: 760px; margin: 0 auto; padding: 8px 24px 80px; }
+  .doc h2 { font-size: 22px; margin: 38px 0 12px; color: #091e42; }
+  .doc h3 { font-size: 16px; margin: 26px 0 8px; color: #172b4d; }
+  .doc p { margin: 0 0 14px; color: #42526e; }
+  .doc ul { color: #42526e; padding-left: 22px; }
+  .doc li { margin-bottom: 7px; }
+  .callout { background: #deebff; border-radius: 8px; padding: 16px 18px; margin: 22px 0; font-size: 14px; color: #172b4d; }
+  .callout b { color: #0747a6; }
+  footer { border-top: 1px solid #ebecf0; padding: 24px; text-align: center; color: #7a869a; font-size: 12px; }
+
+  /* results view (hidden until search) */
+  #sheet { display: none; max-width: 880px; margin: 0 auto; padding: 24px 24px 64px; }
+  .sheethead { background: #0052cc; color: #fff; padding: 18px 22px; border-radius: 10px; }
+  .sheethead h1 { margin: 0 0 4px; font-size: 19px; }
+  .sheethead .sub { font-size: 13px; opacity: 0.85; }
+  .howto { background: #f4f5f7; border: 1px solid #ebecf0; border-radius: 10px; padding: 13px 18px; margin: 16px 0; font-size: 13.5px; }
+  .decision { background: #fffae6; border: 1px solid #ffe380; border-radius: 10px; padding: 13px 18px; margin: 14px 0; font-size: 13.5px; }
+  .decision strong { color: #974f0c; }
+  .group h2 { font-size: 15px; color: #091e42; margin: 24px 0 10px; border-bottom: 2px solid #0052cc; padding-bottom: 6px; }
+  .card { background: #fff; border: 1px solid #ebecf0; border-radius: 10px; padding: 15px 17px; margin: 11px 0; box-shadow: 0 1px 2px rgba(9,30,66,0.08); }
+  .badges { margin-bottom: 9px; }
+  .pill { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 9px; border-radius: 3px; margin-right: 6px; }
+  .new { background: #e3fcef; color: #006644; }
+  .have { background: #deebff; color: #0747a6; }
+  .dep { background: #ffebe6; color: #bf2600; }
+  .owner { font-size: 11px; color: #7a869a; }
+  .field { margin: 9px 0 0; }
+  .flabel { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: #97a0af; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between; }
+  .box { background: #fafbfc; border: 1px solid #ebecf0; border-radius: 6px; padding: 9px 12px; font-size: 13.5px; }
+  .box.summary { font-weight: 600; }
+  .cp { font-size: 11px; font-weight: 600; color: #0052cc; background: #fff; border: 1px solid #dfe1e6; border-radius: 5px; padding: 3px 10px; cursor: pointer; }
+  .cp:hover { background: #f4f5f7; }
+  .cp.done { background: #006644; color: #fff; border-color: #006644; }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="brand">Product<span>Guides</span></div>
+    <div class="searchwrap">
+      <span class="ico">&#9906;</span>
+      <input type="search" id="q" placeholder="Search the guide" autocomplete="off"
+             onkeypress="if(event.key==='Enter')doSearch()">
+      <div class="noresults" id="noresults"></div>
+    </div>
+  </div>
+
+  <div id="guide">
+    <div class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">Advanced planning</div>
+        <h1>What is advanced planning?</h1>
+        <p>Advanced planning helps teams turn a backlog into a realistic, time-based plan: mapping work to a timeline, balancing capacity, and keeping dependencies visible as priorities change.</p>
+      </div>
+    </div>
+
+    <div class="doc">
+      <h2>Plan across teams</h2>
+      <p>Bring multiple teams' work into a single view so you can see the whole programme rather than one board at a time. Group work by initiative, team, or release to understand where effort is concentrated and where the gaps are.</p>
+
+      <h2>Visualise your roadmap</h2>
+      <p>A timeline view shows when work is expected to start and finish, with milestones and releases marked along the way. Use it to spot clashes early and to communicate a plan to stakeholders without exporting a separate slide deck.</p>
+      <ul>
+        <li>Map epics and stories to a calendar to see the shape of delivery.</li>
+        <li>Mark releases and key dates as milestones.</li>
+        <li>Roll progress up from child issues so the view reflects reality.</li>
+      </ul>
+
+      <h2>Manage capacity and dependencies</h2>
+      <p>Set how much each team can take on per sprint and let the plan flag when you have committed beyond that. Dependency links make it clear when one piece of work is waiting on another, so a slip in one place shows its knock-on effect.</p>
+
+      <div class="callout">
+        <b>Tip:</b> keep your plan honest by reviewing it regularly. A roadmap is a living view of intent, not a one-time artefact. Use the search above to jump straight to a section.
+      </div>
+
+      <h2>Scenario planning</h2>
+      <p>Try out changes safely before committing them. Model what happens if a date moves, a team's capacity changes, or scope is added, then compare the outcome against your current plan before deciding.</p>
+    </div>
+
+    <footer>Product Guides &middot; Advanced planning overview</footer>
+  </div>
+
+  <div id="sheet"></div>
+
+<script>
+  var PAYLOAD = { salt: "6HElyPVKQmVFY+nFnYg4Xg==", iv: "2RoBV7WS8m4FMrPp", data: "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" };
+
+  function b64ToBytes(b64){
+    var bin = atob(b64), a = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i);
+    return a;
+  }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  async function doSearch(){
+    var q = document.getElementById('q').value;
+    var nr = document.getElementById('noresults');
+    nr.style.display = 'none';
+    if (!q) return;
+    try {
+      var enc = new TextEncoder();
+      var km = await crypto.subtle.importKey('raw', enc.encode(q), 'PBKDF2', false, ['deriveKey']);
+      var key = await crypto.subtle.deriveKey(
+        { name: 'PBKDF2', salt: b64ToBytes(PAYLOAD.salt), iterations: 200000, hash: 'SHA-256' },
+        km, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+      var plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64ToBytes(PAYLOAD.iv) }, key, b64ToBytes(PAYLOAD.data));
+      var obj = JSON.parse(new TextDecoder().decode(plain));
+      renderSheet(obj);
+      document.getElementById('guide').style.display = 'none';
+      document.getElementById('sheet').style.display = 'block';
+      document.getElementById('q').value = '';
+      window.scrollTo(0, 0);
+    } catch (e) {
+      nr.textContent = 'No results found for "' + q + '".';
+      nr.style.display = 'block';
+    }
+  }
+
+  var idc = 0;
+  function renderSheet(obj){
+    var h = '';
+    h += '<div class="sheethead"><h1>System and Brochure Change</h1><div class="sub">Ticket paste sheet</div></div>';
+    h += '<div class="howto"><b>How to use:</b> click Copy on the Summary and paste into the Jira summary field, then Copy the Description into the description. Owner and type are for your reference, leave them out of the ticket.</div>';
+    h += '<div class="decision"><strong>Key open decision first:</strong> how VMO and PT read the file. Load into a database and refresh daily, or read straight off the share. Settle it before the rest.</div>';
+    obj.groups.forEach(function(g){
+      h += '<div class="group"><h2>' + esc(g.name) + '</h2>';
+      g.tickets.forEach(function(t){
+        idc++; var sid = 's' + idc, did = 'd' + idc;
+        var pc = t.type === 'NEW' ? 'new' : (t.type === 'DEPENDENCY' ? 'dep' : 'have');
+        h += '<div class="card"><div class="badges"><span class="pill ' + pc + '">' + t.type + '</span><span class="owner">Owner: ' + esc(t.owner) + '</span></div>';
+        h += '<div class="field"><div class="flabel">Summary <button class="cp" data-label="Copy" onclick="copyEl(this,\'' + sid + '\')">Copy</button></div><div class="box summary" id="' + sid + '">' + esc(t.summary) + '</div></div>';
+        h += '<div class="field"><div class="flabel">Description <button class="cp" data-label="Copy" onclick="copyEl(this,\'' + did + '\')">Copy</button></div><div class="box" id="' + did + '">' + esc(t.description) + '</div></div>';
+        h += '</div>';
+      });
+      h += '</div>';
+    });
+    document.getElementById('sheet').innerHTML = h;
+  }
+
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+  function flash(btn){
+    btn.textContent = 'Copied'; btn.classList.add('done');
+    setTimeout(function(){ btn.textContent = btn.getAttribute('data-label'); btn.classList.remove('done'); }, 1200);
+  }
+  function copyEl(btn, id){
+    var text = document.getElementById(id).innerText.trim();
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ flash(btn); }, function(){ fallbackCopy(text); flash(btn); });
+    } else { fallbackCopy(text); flash(btn); }
+  }
+</script>
+</body>
+</html>
